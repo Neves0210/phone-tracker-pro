@@ -1,0 +1,238 @@
+@media (max-width: 1180px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .history-card {
+    order: 2;
+  }
+
+  .main-col {
+    order: 1;
+  }
+}
+
+@media (max-width: 920px) {
+  .scan-panel {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .scan-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(0,255,65,.12);
+    padding-right: 0;
+    padding-bottom: 24px;
+  }
+
+  .input-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .field-btn {
+    display: block;
+  }
+
+  .hero-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 18px 12px 32px;
+    gap: 16px;
+  }
+
+  .hero {
+    padding: 28px 18px 24px;
+    min-height: auto;
+  }
+
+  .search-card,
+  .map-card,
+  .actions-card,
+  .history-card {
+    padding: 16px;
+  }
+
+  .grid,
+  .actions-grid,
+  .share-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #map {
+    height: 360px;
+  }
+
+  .radar-big {
+    width: 220px;
+    height: 220px;
+  }
+
+  .radar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .scan-target.t1 {
+    top: 56px;
+    left: 150px;
+  }
+
+  .scan-target.t2 {
+    top: 132px;
+    left: 72px;
+  }
+
+  .scan-target.t3 {
+    top: 96px;
+    left: 108px;
+  }
+
+  .scan-panel {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .terminal {
+    min-height: 260px;
+  }
+
+  .share-card {
+    width: 1080px;
+    height: 1080px;
+  }
+
+  .history-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .glitch {
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .subtitle {
+    font-size: 0.92rem;
+  }
+
+  .badge {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+
+  .helper-row {
+    font-size: 12px;
+  }
+
+  .input,
+  .select,
+  .btn,
+  .mini-btn {
+    padding: 14px 14px;
+    min-height: 52px;
+  }
+
+  .info-card {
+    min-height: 120px;
+    padding: 16px;
+  }
+
+  .info-value {
+    font-size: 1rem;
+  }
+
+  #map {
+    height: 300px;
+  }
+
+  .scan-status h2 {
+    font-size: 1.3rem;
+  }
+
+  .scan-status p {
+    font-size: 0.9rem;
+  }
+
+  .progress-bar {
+    height: 14px;
+  }
+
+  .toast {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: unset;
+  }
+}
+
+@media (max-width: 420px) {
+  .app-shell {
+    padding: 14px 10px 24px;
+  }
+
+  .hero,
+  .search-card,
+  .map-card,
+  .actions-card,
+  .history-card {
+    border-radius: 16px;
+  }
+
+  .glitch {
+    font-size: 1.7rem;
+  }
+
+  .radar {
+    width: 132px;
+    height: 132px;
+  }
+
+  .radar-big {
+    width: 190px;
+    height: 190px;
+  }
+
+  .scan-target.t1 {
+    top: 48px;
+    left: 128px;
+  }
+
+  .scan-target.t2 {
+    top: 114px;
+    left: 60px;
+  }
+
+  .scan-target.t3 {
+    top: 84px;
+    left: 94px;
+  }
+
+  .terminal {
+    min-height: 220px;
+    padding: 14px;
+  }
+
+  #terminalLines {
+    font-size: 12px;
+  }
+
+  .card-title,
+  .info-label {
+    font-size: 11px;
+  }
+}

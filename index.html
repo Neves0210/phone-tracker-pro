@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phone Tracker PRO</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/animations.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+</head>
+<body>
+  <!-- MATRIX BACKGROUND -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <div class="app-shell">
+    <!-- MAIN -->
+    <div class="main-col">
+      <!-- HERO -->
+      <section class="hero glass">
+        <div class="hero-top">
+          <span class="badge">Offline Lookup Engine</span>
+          <span class="badge">No API · Leaflet · Local Parsing</span>
+        </div>
+
+        <div class="glitch-wrap">
+          <h1 class="glitch" data-text="PHONE TRACKER">PHONE TRACKER</h1>
+          <p class="subtitle">Enter a number. Get the location.</p>
+        </div>
+      </section>
+
+      <!-- SEARCH PANEL -->
+      <section class="search-card glass">
+        <div class="input-inline">
+          <div class="field">
+            <label for="countryCode">Country Code</label>
+            <select id="countryCode" class="select">
+              <option value="+1">+1 — USA / Canada</option>
+              <option value="+55" selected>+55 — Brazil</option>
+              <option value="+44">+44 — United Kingdom</option>
+              <option value="+91">+91 — India</option>
+              <option value="+34">+34 — Spain</option>
+              <option value="+49">+49 — Germany</option>
+              <option value="+33">+33 — France</option>
+              <option value="+61">+61 — Australia</option>
+              <option value="+81">+81 — Japan</option>
+              <option value="+82">+82 — South Korea</option>
+              <option value="+351">+351 — Portugal</option>
+              <option value="+54">+54 — Argentina</option>
+              <option value="+52">+52 — Mexico</option>
+              <option value="+39">+39 — Italy</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="phoneInput">Phone Number</label>
+            <input
+              id="phoneInput"
+              class="input"
+              type="tel"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="Enter phone number"
+              maxlength="20"
+            />
+          </div>
+
+          <div class="field field-btn">
+            <button id="trackBtn" class="btn pulse">Track</button>
+          </div>
+        </div>
+
+        <div class="helper-row">
+          <span>Tip: try <code>11 98765-4321</code>, <code>2125550123</code> or <code>000000000</code></span>
+          <span id="formatHint">Format: Brazil mobile / landline detection enabled</span>
+        </div>
+
+        <div class="error-text" id="errorText">Invalid number for the selected country.</div>
+
+        <!-- RADAR -->
+        <div class="radar-wrap">
+          <div>
+            <div class="radar" aria-hidden="true">
+              <span class="blip b1"></span>
+              <span class="blip b2"></span>
+              <span class="blip b3"></span>
+            </div>
+
+            <div class="status-line">
+              <span class="status-dot"></span>
+              <span>Signal monitor armed</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTS -->
+      <section id="resultsWrap" class="results-wrap">
+        <div class="grid" id="resultsGrid"></div>
+
+        <!-- ACTIONS -->
+        <section class="actions-card glass">
+          <div class="card-title">Actions</div>
+
+          <div class="actions-grid">
+            <button id="copyCoordsBtn" class="mini-btn">Copy Coordinates</button>
+            <button id="shareBtn" class="mini-btn secondary">Share Result</button>
+            <button id="recenterBtn" class="mini-btn">Recenter Map</button>
+          </div>
+        </section>
+
+        <!-- MAP -->
+        <section class="map-card glass">
+          <div class="card-title">Interactive Region Map</div>
+          <div id="map"></div>
+        </section>
+      </section>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="history-card glass">
+      <div class="card-title">Search History</div>
+      <div id="historyList" class="search-history-list"></div>
+    </aside>
+  </div>
+
+  <!-- SCAN OVERLAY -->
+  <div class="scan-overlay" id="scanOverlay">
+    <div class="scan-panel">
+      <div class="scan-left">
+        <div class="radar-big">
+          <span class="scan-target t1"></span>
+          <span class="scan-target t2"></span>
+          <span class="scan-target t3"></span>
+        </div>
+
+        <div class="scan-status">
+          <h2 id="scanStatus">SCANNING...</h2>
+          <p id="scanSubtext">
+            Initializing trace route and synchronizing local prefix intelligence...
+          </p>
+        </div>
+      </div>
+
+      <div class="scan-right">
+        <div class="terminal">
+          <div id="terminalLines"></div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-top">
+            <span>Processing secure trace</span>
+            <span id="progressPercent">0%</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <!-- SHARE CARD (hidden render target) -->
+  <div class="share-card" id="shareCard">
+    <div>
+      <div class="share-title">PHONE TRACKER</div>
+      <div class="share-subtitle">Offline number intelligence snapshot</div>
+
+      <div class="share-grid" id="shareGrid"></div>
+    </div>
+
+    <div class="share-footer">
+      <span>Generated locally · No external API</span>
+      <span id="shareTimestamp"></span>
+    </div>
+  </div>
+
+  <!-- JS LIBS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- APP FILES -->
+  <script src="./js/data.js"></script>
+  <script src="./js/parser.js"></script>
+  <script src="./js/map.js"></script>
+  <script src="./js/history.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/scanner.js"></script>
+  <script src="./js/share.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
