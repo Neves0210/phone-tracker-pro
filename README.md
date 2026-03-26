@@ -259,16 +259,8 @@ This project can be deployed easily with **GitHub Pages**.
 
 ## 👨‍💻 Author
 
-**Gabriel Neves**
-
-You can customize this section with your real links:
-
-```markdown
-## 👨‍💻 Author
-
 **Gabriel Neves**  
 [GitHub](https://github.com/Neves0210) • [LinkedIn](https://www.linkedin.com/in/gabriel-neves-dev-ti/)
-```
 
 ---
 
